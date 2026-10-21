@@ -1,5 +1,5 @@
 // 圏外でも動くように、アプリのファイルを端末に保存しておく
-const CACHE = "sanzai-v2";
+const CACHE = "sanzai-v3";
 const FILES = ["./", "./index.html", "./manifest.json", "./icon-180.png", "./icon-192.png", "./icon-512.png"];
 
 self.addEventListener("install", (e) => {

@@ -116,7 +116,7 @@ nav.tabs button[aria-selected="true"] { color: var(--red); }
       <p id="sub">散剤の量から成分量（錠剤換算）を出します</p>
     </header>
 
-    <section class="card">
+    <section class="card" id="cardPct">
       <label class="lbl" for="pct"><span class="star">★</span>散剤の規格</label>
       <div class="field">
         <input id="pct" inputmode="decimal" autocomplete="off" placeholder="10" value="10">
@@ -131,7 +131,7 @@ nav.tabs button[aria-selected="true"] { color: var(--red); }
       </div>
     </section>
 
-    <section class="card">
+    <section class="card" id="cardAmt">
       <label class="lbl" for="amt"><span class="star">★</span><span id="amtLabel">散剤の量（製剤量）</span></label>
       <div class="field">
         <input id="amt" inputmode="decimal" autocomplete="off" placeholder="0.5" value="0.5">
@@ -198,6 +198,9 @@ nav.tabs button[aria-selected="true"] { color: var(--red); }
   function setMode(m) {
     store[mode].amt = amt.value;
     mode = m;
+    var cp = $("cardPct"), ca = $("cardAmt");
+    if (m === 2) cp.parentNode.insertBefore(ca, cp);
+    else cp.parentNode.insertBefore(cp, ca);
     amt.value = store[m].amt;
     $("tab1").setAttribute("aria-selected", m === 1);
     $("tab2").setAttribute("aria-selected", m === 2);
