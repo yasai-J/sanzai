@@ -242,7 +242,11 @@ nav.tabs button[aria-selected="true"] { color: var(--red); }
 </script>
 <script>
 if ("serviceWorker" in navigator) {
-  window.addEventListener("load", function () { navigator.serviceWorker.register("sw.js").catch(function () {}); });
+  window.addEventListener("load", function () { navigator.serviceWorker.register("sw.js", { updateViaCache: "none" }).catch(function () {});
+    var had = !!navigator.serviceWorker.controller, reloaded = false;
+    navigator.serviceWorker.addEventListener("controllerchange", function () {
+      if (had && !reloaded) { reloaded = true; location.reload(); }
+    }); });
 }
 </script>
 </body>
